@@ -1,0 +1,18 @@
+[
+    {
+        "sport": "Cricket",
+        "fact": "The first official Test cricket match was played in 1877 between Australia and England."
+    },
+    {
+        "sport": "Football",
+        "fact": "The first FIFA World Cup was held in Uruguay in 1930."
+    },
+    {
+        "sport": "Badminton",
+        "fact": "India won its first Thomas Cup title in 2022."
+    },
+    {
+        "sport":"Tennis",
+        "fact":"Wimbledon is the oldest tennis tournment in the world and was first held in 1877."
+    }
+]
