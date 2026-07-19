@@ -55,12 +55,12 @@ if st.button("🚀 Generate Quiz", use_container_width=True):
 
                 st.write(question["question"])
 
-                for option in question["options"]:
-                    st.radio(
-                        "Choose an answer",
-                        question["options"],
-                        key=i
-                    )
+                
+                st.radio(
+                    "Choose an answer",
+                    question["options"],
+                    key=i
+                )
 
                 st.divider()
             if st.button("Show Answers"):
