@@ -3,6 +3,7 @@ from src.search import get_live_news_context
 from google import genai 
 from dotenv import load_dotenv 
 import os
+import json
 
 load_dotenv()
 api_key=os.getenv("GEMINI_API_KEY")
@@ -16,52 +17,52 @@ def compile_quiz_data(sport,difficulty):
     prompt = f"""
 You are an expert sports quiz generator.
 
-I will provide two sources of information.
-
 Historical Facts:
 {db_context}
 
 Latest Sports News:
 {web_context}
 
-Generate 10 multiple-choice questions.
+Generate exactly 10 multiple-choice questions.
 
 Rules:
 
-- Use ONLY the information provided.
+- Use ONLY the provided information.
 - Do not use outside knowledge.
 - Do not hallucinate.
-- Difficulty level: {difficulty}
+- Difficulty: {difficulty}
 - Mix historical facts and latest news.
-- Each question should teach the student something new.
-- Each question must have exactly 4 options.
-- Display every option on a NEW LINE.
-- Leave one blank line after every question.
-- After the quiz, provide the answer key.
+- Each question should teach something new.
+
+Return ONLY valid JSON.
 
 Use this exact format:
 
-Question 1:
-Who hosted the first FIFA World Cup?
+[
+  {{
+    "question": "Question text",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "answer": "Option B"
+  }}
+]
 
-A) Brazil
-B) Uruguay
-C) England
-D) Italy
-
-Question 2:
-...
-
-Answer Key:
-1. B
-2. A
-...
+Do not return markdown.
+Do not return explanations.
+Do not wrap the JSON inside ```json.
+Return ONLY the JSON array.
 """
     response=client.models.generate_content(
     model="gemini-3.5-flash",
     contents=prompt
 )
-    return response.text
+    quiz = json.loads(response.text)
+
+    return quiz
 
 if __name__ =="__main__":
     compile_quiz_data("Football","Hard")

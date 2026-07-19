@@ -49,8 +49,29 @@ if st.button("🚀 Generate Quiz", use_container_width=True):
             st.success("✅ Quiz Generated Successfully!")
 
             st.markdown("---")
-            st.markdown(quiz)
+            for i, question in enumerate(quiz, start=1):
 
+                st.subheader(f"Question {i}")
+
+                st.write(question["question"])
+
+                for option in question["options"]:
+                    st.radio(
+                        "Choose an answer",
+                        question["options"],
+                        key=i
+                    )
+
+                st.divider()
+            if st.button("Show Answers"):
+
+                for i, question in enumerate(quiz, start=1):
+
+                    st.success(
+                    f"Question {i}: {question['answer']}"
+                    )
+
+            
         except Exception as e:
             st.error("Something went wrong!")
             st.exception(e)
