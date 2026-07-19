@@ -5,3 +5,4 @@ openai>=1.10.0
 python-dotenv>=1.0.1
 sentence-transformers>=2.3.0
 ddgs==9.14.4
+google-genai==2.12.1
